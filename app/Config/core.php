@@ -4,32 +4,22 @@
  *
  * Use it to configure core behavior of Cake.
  *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
  * @package       app.Config
  * @since         CakePHP(tm) v 0.2.9
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- * 
+ * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
- 
- 
- if ( strstr( gethostname(), 'prod' ) ) {
-    defined('APP_ENV') or define('APP_ENV', 'prod' );
-    Configure::write('App.environment', 'prod');
- } else {
-    defined('APP_ENV') or define('APP_ENV', 'dev' );
-    Configure::write('App.environment', 'dev');
- }
- 
+
 //setLocale(LC_ALL, 'deu');
-Configure::write('Config.language', 'eng');
+//Configure::write('Config.language', 'deu');
 
 /**
  * CakePHP Debug Level:
@@ -126,9 +116,16 @@ Configure::write('Config.language', 'eng');
  * for any URL generation inside the application, set the following
  * configuration variable to the http(s) address to your domain. This
  * will override the automatic detection of full base URL and can be
- * useful when generating links from the CLI (e.g. sending emails)
+ * useful when generating links from the CLI (e.g. sending emails).
+ * If the application runs in a subfolder, you should also set App.base.
  */
 	//Configure::write('App.fullBaseUrl', 'http://example.com');
+
+/**
+ * The base directory the app resides in. Should be used if the
+ * application runs in a subfolder and App.fullBaseUrl is set.
+ */
+	//Configure::write('App.base', '/my_app');
 
 /**
  * Web path to the public images directory under webroot.
@@ -163,12 +160,12 @@ Configure::write('Config.language', 'eng');
  *	`admin_index()` and `/admin/controller/index`
  *	`manager_index()` and `/manager/controller/index`
  */
-	Configure::write('Routing.prefixes', array('admin', 'pdf'));
+	//Configure::write('Routing.prefixes', array('admin'));
 
 /**
  * Turn off all caching application-wide.
  */
-	Configure::write('Cache.disable', true);
+	//Configure::write('Cache.disable', true);
 
 /**
  * Enable cache checking.
@@ -228,24 +225,9 @@ Configure::write('Config.language', 'eng');
  * To use database sessions, run the app/Config/Schema/sessions.php schema using
  * the cake shell command: cake schema create Sessions
  */
-	#ini_set('session.cookie_domain', env('HTTP_BASE'));
-    
-    Configure::write('Session', array(
-        'defaults' => 'database',
-        'cookie' => ( 'ONESYSTEM'),
-        'checkAgent'=>false
-    ));
-    
-    /**
- * The level of CakePHP security.
- */
-    Configure::write('Security.level', 'low');
-
-    /**
-     * Session time out time (in seconds).
-     * Actual value depends on 'Security.level' setting.
-     */
-    Configure::write('Session.timeout', '972000'); // 11 days
+	Configure::write('Session', array(
+		'defaults' => 'php'
+	));
 
 /**
  * A random string used in security hashing methods.
@@ -303,7 +285,7 @@ Configure::write('Config.language', 'eng');
  * then the value of `Config.timezone` will be used. This feature allows you to set users' timezone just
  * once instead of passing it each time in function calls.
  */
-	Configure::write('Config.timezone', 'America/Chicago');
+	//Configure::write('Config.timezone', 'Europe/Paris');
 
 /**
  * Cache Engine Configuration

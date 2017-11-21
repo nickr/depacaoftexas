@@ -8,18 +8,18 @@
  * You should also use this file to include any files that provide global functions/constants
  * that your application uses.
  *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
  * @package       app.Config
  * @since         CakePHP(tm) v 0.10.8.2117
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
 // Setup a 'default' cache configuration for use in the application.
@@ -57,7 +57,8 @@ Cache::config('default', array('engine' => 'File'));
  * Inflector::rules('singular', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  */
-
+Configure::write('App.Name', 'Portal');
+Configure::write('App.SiteName', 'Depaca Of Texas');
 /**
  * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call
  * Uncomment one of the lines below, as you need. Make sure you read the documentation on CakePlugin to use more
@@ -66,31 +67,7 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::loadAll(); // Loads all plugins at once
  * CakePlugin::load('DebugKit'); // Loads a single plugin named DebugKit
  */
- CakePlugin::loadAll();
- #CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
- //CakePlugin::load('Search');
- //CakePlugin::load('Report', array('bootstrap' => false ) );
 
- Configure::write('App.Name', 'Portal');
- Configure::write('App.SiteName', 'Vanguard Resources');
-
- defined('PRO_AUDITLOG_BIND_USER') or define('PRO_AUDITLOG_BIND_USER', true );
- defined('PRO_AUDITLOG_USER_MODEL') or define('PRO_AUDITLOG_USER_MODEL', 'User');
-
- defined('APP_LONGDATE_FORMAT') or define('APP_LONGDATE_FORMAT', 'F jS, Y');
- defined('APP_DATE_FORMAT') or define('APP_DATE_FORMAT', 'M jS, Y');
- defined('APP_SHORTDATE_FORMAT') or define('APP_SHORTDATE_FORMAT', 'M jS');
- defined('APP_DATETIME_FORMAT') or define('APP_DATETIME_FORMAT', 'F jS Y g:i A');
- defined('APP_TIME_FORMAT') or define('APP_TIME_FORMAT', 'g:i A');
- defined('APP_BOOTSTRAP_FORMAT') or define('APP_BOOTSTRAP_FORMAT', 'm/d/Y');
-
-
- defined('DATE_MYSQL_DATE') or define('DATE_MYSQL_DATE', 'Y-m-d');
- defined('DATE_MYSQL_DATETIME') or define('DATE_MYSQL_DATETIME', 'Y-m-d H:i:s');
- defined('DATE_MYSQL_TIME') or define('DATE_MYSQL_TIME', 'H:i:s');
- defined('DATE_MYSQL_YEAR') or define('DATE_MYSQL_YEAR', 'Y');
-
- Configure::write('expired_testing', '+90 Days');
 /**
  * To prefer app translation over plugin translation, you can set
  *
@@ -128,21 +105,8 @@ CakeLog::config('debug', array(
 	'types' => array('notice', 'info', 'debug'),
 	'file' => 'debug',
 ));
-
 CakeLog::config('error', array(
 	'engine' => 'File',
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
-));
-
-
-Configure::write('Pdf', array(
-    'prefix' => 'pdf',
-    'engine' => 'CakePdf.WkHtmlToPdf',
-    'pageSize'=>'A4',
-    'orientation'=>'portrait',
-    //Server
-    #'binary'=>'/usr/local/bin/wkhtmltopdf',
-    //Windows
-    'binary'=>'c:\wkhtmltopdf\bin\wkhtmltopdf.exe'
 ));
