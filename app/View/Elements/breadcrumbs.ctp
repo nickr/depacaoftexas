@@ -15,40 +15,38 @@ if ( empty($breadcrumbs_for_layout ) && !empty( $breadcrumbs ) && is_array( $bre
     $breadcrumbs_for_layout = $breadcrumbs;
 }
 
-$link_options = array(
-    'class'=>'btn btn-default',
-    'escape'=>false
-);
-            
 if ( !empty($breadcrumbs_for_layout) ) { 
     ?>
-    <div class="btn-group btn-breadcrumb clearfix">
-        <?php 
-        echo $this->Html->link(
-            '<i class="fa fa fa-dashboard fa-fw"></i>', 
-            array('plugin'=>false, 'controller'=>false, 'action'=>'index' ), 
-            array('class'=>'btn btn-default ','escape'=>false ) 
-        );
-        
-        foreach ( $breadcrumbs_for_layout as $key=>$crumb ) { 
-            if(!empty( $crumb['options'] ) && !is_array( $crumb['options'])) { 
-                throw new Exception('Invalid breadcrumb options.');
-            }
-            
-            if(is_array( Configure::read('Breadcrumbs.option_defaults'))){
-                #$link_options = array_merge( Configure::read('Breadcrumbs.option_defaults'), $crumb['options'] );
-            }else{
-                #$link_options = array();
-            }
-            
-            echo $this->Html->link( 
-                $crumb['title'], 
-                $crumb['link'], 
-                $link_options 
-            );
-        } 
-        ?>
-    </div><!-- /.breadcrumbs -->
+    <div class="container">
+        <div class="breadcrumbs clearfix">    
+            <ol class="breadcrumb">
+            	<li class="breadcrumb-item">
+            		<?php
+					echo $this->Html->link(
+	            		'Home',
+	                	array('controller'=>'Pages', 'action'=>'index'),
+	                	array('escape'=>false)
+					);
+					?>	
+            	</li>
+                <?php 
+                $last = end($breadcrumbs_for_layout);
+                foreach ( $breadcrumbs_for_layout as $key=>$crumb ) {
+                    if ( !empty( $crumb['options'] ) && !is_array( $crumb['options'] )  ) { 
+                        throw new Exception('Invalid breadcrumb options.');
+                    }
+                    if ( isset( $crumb['options'] ) ) {
+                        $link_options = $crumb['options'];
+                    } else {
+                        $link_options = array();
+                    }
+                    
+                    $active = ($last['title'] == $crumb['title']) ? 'active' : null ;
+                    ?>
+                    <li class="breadcrumb-item <?=$active?>"><?php echo $this->Html->link( $crumb['title'], $crumb['link'], $link_options );?></li>
+                <?php } ?>
+            </ol>
+        </div><!-- /.breadcrumbs -->
+    </div>
     <?php 
-} 
-?>
+} ?>
