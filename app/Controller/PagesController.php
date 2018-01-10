@@ -58,16 +58,20 @@ class PagesController extends AppController {
     
     function beforeFilter(){
         parent::beforeFilter();
-        
+        $this->Auth->allow();
         
     }
 
     public $components = array( 'RequestHandler', 'Paginator', 'Session');
     
+    public function index() {
+    	$this->redirect(array('controller'=>'Pages', 'action' => 'home'));
+	}
+	
  	public function home() {
  		$recs = $this->PageDetail->find('all', array(
             'conditions' => array(
-                'PageDetail.page_id IS NULL'
+                'PageDetail.page_id' =>1
             ),
         ));
         

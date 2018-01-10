@@ -28,4 +28,20 @@ class PageDetail extends AppModel {
             'order' => ''
 		),
 	);
+	
+	public function getContent($page_id = null){
+		$recs = $this->find('all', array(
+            'conditions' => array(
+                'PageDetail.page_id' => $page_id,
+            ),
+            'contain'=>array(
+            	
+            ),
+        ));
+		#pr($recs);
+		#exit;
+		return $recs;
+	}
+	
+	
 }

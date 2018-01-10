@@ -36,31 +36,63 @@ class Page extends AppModel {
     );
 
     public function getmenu( ) {
-    	//get the company layout of the company
+    	//get the parent layout
     	$parent = $this->find('all', array(
             'conditions' => array(
-                'Page.parent_id IS NULL'
+                'Page.parent_id IS NULL',
+                'Page.is_menu' => 1,
+                'Page.is_active' => 1
             ),
             'contain'=>array(
             ),
-            'fields'=>array('Page.lft', 'Page.rght')
+            'fields'=>array('Page.lft', 'Page.rght'),
+            'order'=>array('Page.lft' => 'ASC')
         ));
 		
 		$recs = array();            
         foreach($parent as $v){
-            $info = $this->find('threaded', array(
+        	$info = $this->find('threaded', array(
 	            'conditions' => array(
 	                'Page.lft >=' => $v['Page']['lft'], 
-	                'Page.rght <=' => $v['Page']['rght']
+	                'Page.rght <=' => $v['Page']['rght'],
+	                'Page.is_menu' => 1,
+	                'Page.is_active' => 1
 	            ),
 	            'contain'=>array()
 	        ));
 	        
 	        $recs = array_merge($recs, $info);
 	    }
-	    
-        #pr($recs);
-        #exit;
-        return $recs;
+		
+		return $recs;
     }
+    
+    public function getAdminMenu( ) {
+    	//get the parent layout
+    	$parent = $this->find('all', array(
+            'conditions' => array(
+                'Page.parent_id IS NULL',
+            ),
+            'contain'=>array(
+            ),
+            'fields'=>array('Page.lft', 'Page.rght'),
+            'order'=>array('Page.lft' => 'ASC')
+        ));
+		
+		$recs = array();            
+        foreach($parent as $v){
+        	$info = $this->find('threaded', array(
+	            'conditions' => array(
+	                'Page.lft >=' => $v['Page']['lft'], 
+	                'Page.rght <=' => $v['Page']['rght'],
+	            ),
+	            'contain'=>array()
+	        ));
+	        
+	        $recs = array_merge($recs, $info);
+	    }
+		
+		return $recs;
+    }
+    
 }

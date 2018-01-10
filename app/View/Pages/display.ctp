@@ -12,4 +12,5 @@
 		echo $item['content'];
 	}  
 	?>
+	<div id="push"></div>
 </div>

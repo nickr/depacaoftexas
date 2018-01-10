@@ -7,15 +7,22 @@
         </ol>
         <div class="carousel-inner" role="listbox">
           	<!-- Slide One - Set the background image for this slide in the line below -->
-          	<div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
+          	<?php
+          	$img_1 = $this->Html->image("image1.jpg", array(
+          		'fullBase' => true,
+                'alt' => 'depacaoftexas',
+            ));
+            #echo $img_1;
+          	?>
+          	<div class="carousel-item active" style="background-image: url('<?php echo $this->webroot . 'img' . '/image1.jpg'; ?>')">
             	<div class="carousel-caption d-none d-md-block">
               		<h3>First Slide</h3>
-              		<p>This is a description for the first slide.</p>
+              		<p>This is a description for the first slide. test 1234</p>
             	</div>
           	</div>
           	
           	<!-- Slide Two - Set the background image for this slide in the line below -->
-          	<div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+          	<div class="carousel-item" style="background-image: url('<?php echo $this->webroot . 'img' . '/image2.jpg'; ?>')">
             	<div class="carousel-caption d-none d-md-block">
               		<h3>Second Slide</h3>
               		<p>This is a description for the second slide.</p>
@@ -44,6 +51,13 @@
 <!-- Page Content -->
 <div class="container">
 	<?php
+							echo $this->Html->link(
+								'<i class="fa fa-plus fa-fw"></i> here',
+								array( 'controller'=>'Admin', 'action'=>'addChild', 3), 
+								array( 'escape'=>false, 'data-toggle'=>'modal', 'data-target'=>'#myModal')
+							);
+							?>
+	<?php
 	
     foreach($recs as $item){
 		?>
@@ -54,5 +68,6 @@
 		
 	}  
 	?>
-    
+    <div id="push"></div>
+
 </div>

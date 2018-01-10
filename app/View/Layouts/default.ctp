@@ -31,6 +31,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         
         <!---- scriptsTop ---->
         <?php $this->start('scriptsTop'); ?>
+        	<?php echo $this->Html->script('jquery.min'); ?>
+        	<?php echo $this->Html->script('bootstrap.min'); ?>
         <?php $this->end('scriptsTop'); ?>
         <!---- /scriptsTop ---->
         
@@ -42,17 +44,18 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         
         <!---- scriptsBottom ---->
         <?php $this->start('scriptsBottom'); ?>
-        	<?php echo $this->Html->script('jquery.min'); ?>
+        	
             <?php #echo $this->Html->script('chosen.jquery.min'); ?>
-            <?php echo $this->Html->script('bootstrap.bundle'); ?>    
+            
         <?php $this->end('scriptsBottom'); ?>
         <!---- /scriptsBottom ---->
         
         <!---- csslib ---->
         <?php $this->start('csslib'); ?>
             <!-- The styles -->
-            <?php echo $this->Html->css('bootstrap.min.css'); ?>
             <?php echo $this->Html->css('modern-business'); ?>
+            <?php echo $this->Html->css('bootstrap.min.css'); ?>
+            
             <?php #echo $this->Html->css('https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css');?>
             <?php #echo $this->Html->css('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');?>
         <?php $this->end('csslib'); ?>
@@ -77,8 +80,8 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
         </noscript>
         
         <?php #echo $this->element('breadcrumbs'); ?>
-        <?php echo $this->Session->flash(); ?>
-        <?php echo $this->Session->flash('auth'); ?>
+        <?php #echo $this->Session->flash(); ?>
+        <?php #echo $this->Session->flash('auth'); ?>
             
         <?php if(isset($logged_in)): ?>
             <?php 
@@ -90,15 +93,21 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
             }*/
             ?>
         <?php endif; ?>
-        
-        <?php echo $this->fetch('content'); ?>
-        <?php echo $this->element('default_footer'); ?>
+        <div id="wrap">
+        	<?php echo $this->Flash->render(); ?>
+        	<?php echo $this->fetch('content'); ?>
+        	
+        </div>
+        <div id="footer">
+			<?php echo $this->element('default_footer'); ?>
+		</div>
         <?php echo $this->fetch('script'); ?>
         
         <!-- Normal Model -->
-        <div class="modal type-primary fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
             <div class="modal-dialog">
                 <div class="modal-content">
+                	
                 </div> <!-- /.modal-content -->
             </div> <!-- /.modal-dialog -->
         </div> <!-- /.modal -->

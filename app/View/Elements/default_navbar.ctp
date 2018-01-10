@@ -55,11 +55,37 @@ $menu = $this->requestAction('/Pages/getMenu/');
 								?>
 						  	</div>
 			            </li>
+			            
 	            		<?php
 	            	}
-				}
+	            }
           		
-          		?>
+          		if($this->Session->check('Auth.User')){
+	            	?>
+		            <li class="nav-item">
+		              	<?php
+						echo $this->Html->link(
+						    'Admin',
+						    array( 'controller'=>'Admin', 'action'=>'index'), 
+						    array( 'escape'=>false, 'class'=>'nav-link')
+						);                    
+						?>
+		            </li>
+		            <?php
+				}else{
+					?>
+		            <li class="nav-item">
+		              	<?php
+						echo $this->Html->link(
+						    'Log In',
+						    array( 'controller'=>'Users', 'action'=>'login'), 
+						    array( 'escape'=>false, 'class'=>'nav-link')
+						);                    
+						?>
+		            </li>
+		            <?php
+		        }
+		        ?>
 	            <!--
 	            <li class="nav-item">
 	            	<a class="nav-link" href="about.html">About</a>
